@@ -1,5 +1,16 @@
 package com.elviejomolino.gestorarticulos.service;
 
-public class ArticuloService {
+public interface ArticuloService { // INICIO INTERFACE ARTICULOSERVICE;
 
-}
+    // MÉTODOS;
+    // FINDALL();
+
+    // FINDBYID(ID);
+
+    // SAVE(ENTITY);
+
+    // MODIFIBYID(ID, ENTITY);
+
+    // DELETEBYID(ID);
+
+} // FINAL INTERFACE ARTICULOSERVICE;
