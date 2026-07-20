@@ -18,6 +18,11 @@ import com.elviejomolino.gestorarticulos.repository.ArticuloRepository;
 // IMPORTO OPTIONAL;
 import java.util.Optional;
 
+// IMPORTO REPOSITORY;
+import org.springframework.stereotype.Repository;
+
+@Repository
+
 public class ArticuloRepositoryImpl implements ArticuloRepository { // INICIO CLASE ARTICULOREPOSITORY;
 
     // ESTADO: ATRIBUTOS;
@@ -97,5 +102,20 @@ public class ArticuloRepositoryImpl implements ArticuloRepository { // INICIO CL
     }
 
     // DELETEBYID(ID);
+    @Override
+    public boolean deleteByIdRepository(Long id) {
 
+        Optional<Articulo> optionalArticulo = this.findByIdRepository(id);
+
+        if (optionalArticulo.isPresent()) {
+
+            this.listaArticulos.remove(optionalArticulo.get());
+
+            return true;
+
+        }
+
+        return false;
+
+    }
 } // FINAL CLASE ARTICULOREPOSITORY;
