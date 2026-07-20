@@ -45,17 +45,56 @@ public class ArticuloRepositoryImpl implements ArticuloRepository { // INICIO CL
         for (Articulo articulo : listaArticulos) {
 
             if (Objects.equals(articulo.getId(), id)) {
+
                 return Optional.of(articulo);
+
             }
 
-            return Optional.empty();
-
         }
+
+        return Optional.empty();
+
     }
 
     // SAVE(ENTITY);
+    @Override
+    public Articulo saveRepository(Articulo articulo) {
+
+        count = count + 1;
+        articulo.setId(count);
+        this.listaArticulos.add(articulo);
+        return articulo;
+
+    }
 
     // MODIFYBYID(ID, ENTITY);
+    @Override
+    public Optional<Articulo> modifyByIdRepository(Long id, Articulo articulo) {
+
+        Optional<Articulo> optionalArticulo = this.findByIdRepository(id);
+
+        if (optionalArticulo.isPresent()) {
+
+            Articulo articuloModificado = optionalArticulo.get();
+
+            // ARTICULO;
+            // NOMBRE;
+            articuloModificado.setNombre(articulo.getNombre());
+
+            // FECHACREACION;
+            articuloModificado.setFechaCreacion(articulo.getFechaCreacion());
+
+            // PRECIO;
+            articuloModificado.setPrecio(articulo.getPrecio());
+
+            // DESCRIPCION;
+            articuloModificado.setDescripcion(articulo.getDescripcion());
+
+        }
+
+        return optionalArticulo;
+
+    }
 
     // DELETEBYID(ID);
 
