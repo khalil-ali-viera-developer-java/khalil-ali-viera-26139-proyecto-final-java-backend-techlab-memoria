@@ -58,7 +58,7 @@ public class ArticuloServiceImpl implements ArticuloService { // INICIO CLASE AR
         }
 
         if (id <= 0) {
-            throw new IllegalArgumentException("El id del articulo tiene que ser mayor a 0.");
+            throw new IllegalArgumentException("El id del articulo tiene que ser positivo.");
         }
 
         // VALIDAR ARTICULO;
@@ -119,7 +119,87 @@ public class ArticuloServiceImpl implements ArticuloService { // INICIO CLASE AR
     }
 
     // MODIFYBYID(ID, ENTITY);
+    @Override
+    public Articulo modifyByIdService(Long id, Articulo articulo) throws ArticuloNotFoundException {
+
+        // VALIDAR ID;
+        if (id == null) {
+            throw new IllegalArgumentException("El id del articulo no puede ser nulo.");
+        }
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id del articulo tiene que ser positivo.");
+        }
+
+        // VALIDAR ARTICULO;
+        if (articulo == null) {
+            throw new IllegalArgumentException("El articulo no puede ser nulo.");
+        }
+
+        // VALIDAR ARTICULO NOMBRE;
+        if (articulo.getNombre() == null) {
+            throw new IllegalArgumentException("El nombre del articulo no puede ser nulo.");
+        }
+
+        if (articulo.getNombre().isBlank()) {
+            throw new IllegalArgumentException(
+                    "El nombre del articulo no puede estar vacio, tener espacios en blanco o caracteres de espacios en blanco.");
+        }
+
+        // VALIDAR ARTICULO FECHACREACION;
+        if (articulo.getFechaCreacion() == null) {
+            throw new IllegalArgumentException("La fecha de creación del articulo no puede ser nula.");
+        }
+
+        if (articulo.getFechaCreacion().isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("La fecha de creación del articulo no puede ser futura.");
+        }
+
+        // VALIDAR ARTICULO PRECIO;
+        if (articulo.getPrecio() <= 0) {
+            throw new IllegalArgumentException("El precio del articulo tiene que ser positivo.");
+        }
+
+        // VALIDAR DESCRIPCION;
+        if (articulo.getDescripcion() == null) {
+            throw new IllegalArgumentException("La descripción del articulo no puede ser nula.");
+        }
+
+        if (articulo.getDescripcion().isBlank()) {
+            throw new IllegalArgumentException(
+                    "La descripción del articulo no puede estar vacia, tener espacios en blanco o caracteres de espacios en blanco.");
+        }
+
+        Optional<Articulo> optionalArticulo = this.articuloRepository.modifyByIdRepository(id, articulo);
+
+        if (optionalArticulo.isEmpty()) {
+            throw new ArticuloNotFoundException("El articulo con id " + id + " no fue encontrado.");
+        }
+
+        return optionalArticulo.get();
+
+    }
 
     // DELETEBYID(ID);
+    @Override
+    public void deleteByIdService(Long id) throws ArticuloNotFoundException {
+
+        // VALIDAR ID;
+        if (id == null) {
+            throw new IllegalArgumentException("El id del articulo no puede ser nulo.");
+        }
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id del articulo tiene que ser positivo.");
+        }
+
+        // VALIDAR ARTICULO;
+        boolean articuloEliminado = this.articuloRepository.deleteByIdRepository(id);
+
+        if (!articuloEliminado) {
+            throw new ArticuloNotFoundException("El articulo con id " + id + " no fue encontrado.");
+        }
+
+    }
 
 } // FINAL CLASE ARTICULOSERVICEIMPL;
