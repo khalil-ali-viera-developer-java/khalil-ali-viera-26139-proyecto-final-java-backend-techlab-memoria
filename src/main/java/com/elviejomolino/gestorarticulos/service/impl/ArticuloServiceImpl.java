@@ -72,7 +72,21 @@ public class ArticuloServiceImpl implements ArticuloService { // INICIO CLASE AR
     // SAVE(ENTITY);
     @Override
     public Articulo saveService(Articulo articulo) {
-        return new Articulo();
+
+        // VALIDAR ARTICULO;
+        if (articulo == null) {
+            throw new IllegalArgumentException("El articulo no puede ser nulo.");
+        }
+
+        // VALIDAR ARTICULO NOMBRE;
+
+        // VALIDAR ARTICULO FECHACREACION;
+
+        // VALIDAR ARTICULO PRECIO;
+
+        // VALIDAR DESCRIPCION;
+
+        return this.articuloRepository.saveRepository(articulo);
     }
 
     // MODIFYBYID(ID, ENTITY);
