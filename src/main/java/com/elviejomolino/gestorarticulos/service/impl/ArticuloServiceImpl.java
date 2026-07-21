@@ -1,5 +1,82 @@
 package com.elviejomolino.gestorarticulos.service.impl;
 
-public class ArticuloServiceImpl {
+// IMPORTO ARTICULOREPOSITORY;
+import com.elviejomolino.gestorarticulos.repository.ArticuloRepository;
 
-}
+// IMPORTO ARTICULO SERVICE;
+import com.elviejomolino.gestorarticulos.service.ArticuloService;
+
+// IMPORTO LIST;
+import java.util.List;
+
+// IMPORTO AUTOWIRED
+import org.springframework.beans.factory.annotation.Autowired;
+
+// IMPORTO SERVICE;
+import org.springframework.stereotype.Service;
+
+// IMPORTO ARTICULO;
+import com.elviejomolino.gestorarticulos.model.Articulo;
+
+// IMPORTO ARTICULONOTFOUNDEXCEPTION;
+import com.elviejomolino.gestorarticulos.exception.ArticuloNotFoundException;
+
+// IMPORTO OPTIONAL;
+import java.util.Optional;
+
+@Service
+public class ArticuloServiceImpl implements ArticuloService { // INICIO CLASE ARTICULOSERVICEIMPL;
+
+    // ESTADO: ATRIBUTOS;
+    private ArticuloRepository articuloRepository;
+
+    // COMPORTAMIENTO: CONSTRUCTORES - MÉTODOS;
+    // CONSTRUCTOR POR DEFECTOR;
+
+    // CONSTRUCTOR PARAMETRIZADO;
+    public ArticuloServiceImpl(@Autowired ArticuloRepository articuloRepository) {
+        this.articuloRepository = articuloRepository;
+    }
+
+    // MÉTODOS;
+    // FINDALL();
+    @Override
+    public List<Articulo> findAllService() {
+        return this.articuloRepository.findAllRepository();
+    }
+
+    // FINDBYID(ID);
+    @Override
+    public Articulo findByIdService(Long id) throws ArticuloNotFoundException {
+
+        // VALIDAR ID;
+        if (id == null) {
+            throw new IllegalArgumentException("El id del articulo no puede ser nulo.");
+        }
+
+        if (id <= 0) {
+            throw new IllegalArgumentException("El id del articulo tiene que ser mayor a 0.");
+        }
+
+        // VALIDAR ARTICULO;
+        Optional<Articulo> optionalArticulo = this.articuloRepository.findByIdRepository(id);
+
+        if (optionalArticulo.isEmpty()) {
+            throw new ArticuloNotFoundException("El articulo con id: " + id + " no fue encontrado.");
+        }
+
+        return optionalArticulo.get();
+
+    }
+
+    // SAVE(ENTITY);
+    @Override
+    public Articulo saveService(Articulo articulo) {
+        return new Articulo();
+    }
+
+    // MODIFYBYID(ID, ENTITY);
+
+    // DELETEBYID(ID);
+
+} // FINAL CLASE ARTICULOSERVICEIMPL;
