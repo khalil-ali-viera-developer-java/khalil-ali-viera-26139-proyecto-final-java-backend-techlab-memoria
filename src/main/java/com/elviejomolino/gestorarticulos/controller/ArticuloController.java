@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 // IMPORTO RESPONSEENTITY;
 import org.springframework.http.ResponseEntity;
 
+// IMPORTO DELETEMAPPING;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 // IMPORTO GETMAPPING;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 // IMPORTO POSTMAPPING;
 import org.springframework.web.bind.annotation.PostMapping;
+
+// IMPORTO PUTMAPPIN;
+import org.springframework.web.bind.annotation.PutMapping;
 
 // IMPORTO REQUESTBODY;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -111,8 +117,47 @@ public class ArticuloController { // INICIO CLASE ARTICULOCONTROLLER;
     }
 
     // MODIFYBYID(ID, ENTITY);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> modifyByIdController(@PathVariable Long id, @RequestBody Articulo articulo) {
+
+        try {
+
+            Articulo modify = this.articuloService.modifyByIdService(id, articulo);
+
+            // RETURN HTTP 200 OK;
+            return ResponseEntity.ok(modify);
+
+        } catch (IllegalArgumentException e) {
+
+            // RETURN HTTP 400 BAD REQUEST;
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        } catch (ArticuloNotFoundException e) {
+
+            // RETURN HTTP 404 NOT FOUND;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+        }
+    }
 
     // DELETEBYID(ID);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteByIdController(@PathVariable Long id) {
 
+        try {
+
+            // RETURN HTTP 204 NO CONTENT;
+
+        } catch (IllegalArgumentException e) {
+
+            // RETURN HTTP 400 BAD REQUEST;
+
+        } catch (ArticuloNotFoundException e) {
+
+            // RETURN HTTP 404 NOT FOUND;
+
+        }
+
+    }
 }
 // FINAL CLASE ARTICULOCONTROLLER;
