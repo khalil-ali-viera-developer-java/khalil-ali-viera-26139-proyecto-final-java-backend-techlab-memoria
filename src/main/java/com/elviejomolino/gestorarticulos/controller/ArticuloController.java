@@ -2,7 +2,10 @@ package com.elviejomolino.gestorarticulos.controller;
 
 // IMPORTO AUTOWIRED;
 import org.springframework.beans.factory.annotation.Autowired;
+
+// IMPORTO HTTPSTATUS;
 import org.springframework.http.HttpStatus;
+
 // IMPORTO RESPONSEENTITY;
 import org.springframework.http.ResponseEntity;
 
@@ -11,6 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 // IMPORTO PATHVARIABLE;
 import org.springframework.web.bind.annotation.PathVariable;
+
+// IMPORTO POSTMAPPING;
+import org.springframework.web.bind.annotation.PostMapping;
+
+// IMPORTO REQUESTBODY;
+import org.springframework.web.bind.annotation.RequestBody;
 
 // IMPORTO REQUESTMAPPING;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +33,9 @@ import com.elviejomolino.gestorarticulos.service.ArticuloService;
 // IMPORTO LIST;
 import java.util.List;
 
+// IMPORTO ARTICULONOTFOUNDEXCEPTION;
 import com.elviejomolino.gestorarticulos.exception.ArticuloNotFoundException;
+
 // IMPORTO ARTICULO;
 import com.elviejomolino.gestorarticulos.model.Articulo;
 
@@ -81,6 +92,23 @@ public class ArticuloController { // INICIO CLASE ARTICULOCONTROLLER;
     }
 
     // SAVE(ENTITY);
+    @PostMapping
+    public ResponseEntity<?> saveController(@RequestBody Articulo articulo) {
+
+        try {
+
+            Articulo response = this.articuloService.saveService(articulo);
+
+            // RETURN HTTP 201 CREATED;
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+        } catch (IllegalArgumentException e) {
+
+            // RETURN HTTP 400;
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
 
     // MODIFYBYID(ID, ENTITY);
 
