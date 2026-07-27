@@ -1,0 +1,152 @@
+{
+  "info": {
+    "_postman_id": "ea4c3373-fcaa-4765-93b3-7471f4148cd6",
+    "name": "Gestor Artículos API - Techlab - Memoria",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "22812964"
+  },
+  "item": [
+    {
+      "name": "findAll",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/memoria/articulos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "memoria",
+            "articulos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "save",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Memoria sd Kevington\",\r\n    \"fechaCreacion\": \"2026-07-27\",\r\n    \"precio\": 90.000,\r\n    \"descripcion\": \"Memoria sd Kevington 32 gb\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/memoria/articulos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "memoria",
+            "articulos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "findById",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Silla Gamer\",\r\n    \"precio\": 150000,\r\n    \"descripcion\": \"Silla Gamer RGB\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/memoria/articulos/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "memoria",
+            "articulos",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "modifyById",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Leña de Acacia\",\r\n    \"fechaCreacion\": \"2026-07-27\",\r\n    \"precio\": 5000,\r\n    \"descripcion\": \"Leña de acacia para horno de barro, salamandra y asador criollo.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/memoria/articulos/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "memoria",
+            "articulos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "deleteById",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Silla Gamer\",\r\n    \"precio\": 180000,\r\n    \"descripcion\": \"Silla Game Pro \"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/memoria/articulos/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "memoria",
+            "articulos",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

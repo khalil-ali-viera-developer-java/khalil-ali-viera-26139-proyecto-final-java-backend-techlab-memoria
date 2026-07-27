@@ -85,12 +85,12 @@ public class ArticuloController { // INICIO CLASE ARTICULOCONTROLLER;
 
         } catch (IllegalArgumentException e) {
 
-            // RETURN HTTP 400;
+            // RETURN HTTP 400 BAD REQUEST;
             return ResponseEntity.badRequest().body(e.getMessage());
 
         } catch (ArticuloNotFoundException e) {
 
-            // RETURN HTTP 404;
+            // RETURN HTTP 404 NOT FOUND;
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 
         }
@@ -110,7 +110,7 @@ public class ArticuloController { // INICIO CLASE ARTICULOCONTROLLER;
 
         } catch (IllegalArgumentException e) {
 
-            // RETURN HTTP 400;
+            // RETURN HTTP 400 BAD REQUEST;
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
@@ -146,15 +146,20 @@ public class ArticuloController { // INICIO CLASE ARTICULOCONTROLLER;
 
         try {
 
+            this.articuloService.deleteByIdService(id);
+
             // RETURN HTTP 204 NO CONTENT;
+            return ResponseEntity.noContent().build();
 
         } catch (IllegalArgumentException e) {
 
             // RETURN HTTP 400 BAD REQUEST;
+            return ResponseEntity.badRequest().body(e.getMessage());
 
         } catch (ArticuloNotFoundException e) {
 
             // RETURN HTTP 404 NOT FOUND;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 
         }
 
